@@ -1,0 +1,39 @@
+package com.devstack.b2.automation.util;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.NoSuchDriverException;
+
+import static java.sql.DriverManager.getDriver;
+
+public class ThreadLocalWebDriverManager {
+    private static ThreadLocal<WebDriver> threadLocalWebDriver = new ThreadLocal<WebDriver>();
+
+    public static PropertyHandler propertyHandler = new PropertyHandler();
+
+    public static WebDriver createWebDriver() {
+        String browser = propertyHandler.getProperty("browser");
+        WebDriver driver = switch (browser) {
+            case "chrome" -> WebDriverManager.chromedriver().create();
+            case "firefox" -> WebDriverManager.firefoxdriver().create();
+            case "ie" -> WebDriverManager.iedriver().create();
+            default -> throw new NoSuchDriverException("unsupported browser" + browser);
+        };
+
+        threadLocalWebDriver.set(driver);
+        return driver;
+    }
+    public static WebDriver getDriver() {
+        return threadLocalWebDriver.get();
+    }
+    public static void removeDriver() {
+        if (getDriver() != null) {
+            getDriver().quit();
+            threadLocalWebDriver.remove();
+
+        }
+    }
+
+    }
+
