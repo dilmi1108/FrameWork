@@ -13,7 +13,7 @@ public class ExtentReportManager {
     private static ExtentReports extent;
     private static ExtentTest test;
 
-    public static void imitReport(){
+    public static void initReport(){
         extent = new ExtentReports();
         ExtentSparkReporter sparkReporter = new ExtentSparkReporter("./reports/extentreport.html");
         sparkReporter.config().setTheme(Theme.DARK);
@@ -38,9 +38,9 @@ public class ExtentReportManager {
         }
     }
 
-    public static void logSkip(String message){
+    public static void logSkip(String message,String errorImg){
         if(Objects.nonNull(test)){
-            test.log(Status.SKIP,message);
+            test.skip(message, MediaEntityBuilder.createScreenCaptureFromBase64String(errorImg).build());
         }
     }
 
