@@ -12,7 +12,7 @@ public class ThreadLocalWebDriverManager {
 
     public static PropertyHandler propertyHandler = new PropertyHandler();
 
-    public static WebDriver createWebDriver() {
+    public static WebDriver createDriver() {
         String browser = propertyHandler.getProperty("browser");
         WebDriver driver = switch (browser) {
             case "chrome" -> WebDriverManager.chromedriver().create();
