@@ -44,6 +44,12 @@ public class ExtentReportManager {
         }
     }
 
+    public static void writeToReport(String message){
+        if(Objects.nonNull(test)){
+            test.log(Status.INFO,message);
+        }
+    }
+
     public static void flushReport(){
         if(Objects.nonNull(test)){
             extent.flush();
