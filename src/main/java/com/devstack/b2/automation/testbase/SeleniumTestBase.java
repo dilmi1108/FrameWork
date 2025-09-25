@@ -5,6 +5,7 @@ import com.devstack.b2.automation.util.ThreadLocalWebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -39,6 +40,6 @@ public class SeleniumTestBase {
     }
     public static WebElement waitForVisibilityOfElement(By locator,long timeout) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
-        return null;
+        return wait.until(ExpectedConditions.visibilityOf(driver.findElement(locator)));
     }
 }
