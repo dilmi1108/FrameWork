@@ -6,4 +6,5 @@ import org.testng.annotations.Listeners;
 
 @Listeners(TestNGListeners.class)
 public class BaseTest extends SeleniumTestBaseHelper {
+
 }
