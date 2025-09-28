@@ -7,17 +7,26 @@ import org.openqa.selenium.WebDriver;
 
 public class LIB_Common extends FunctionBase {
 
-    public PageLogin pageLogin;
+    public PageLogin pg_login;
 
     public LIB_Common(WebDriver driver) {
         super(driver);
-        pageLogin = new PageLogin(driver);
+        pg_login = new PageLogin(driver);
     }
-    public void bc_Login(String username, String password) {
-        ExtentReportManager.writeToReport("Start of bc_Login ");
-        pageLogin.fillUserName(username);
-        pageLogin.fillPassword(password);
-        pageLogin.clickLogin();
-        ExtentReportManager.writeToReport("End of bc_Login ");
+
+    public void bc_SuccessLogin(String userName, String password) {
+        ExtentReportManager.writeToReport("Start of bc_SuccessLogin");
+        pg_login.fillUserName(userName);
+        pg_login.fillPassword(password);
+        pg_login.clickLogin();
+        ExtentReportManager.writeToReport("End of bc_SuccessLogin");
+    }
+
+    public void bc_FailLogin(String userName, String password) {
+        ExtentReportManager.writeToReport("Start of bc_FailLogin");
+        pg_login.fillUserName(userName);
+        pg_login.fillPassword(password);
+        pg_login.clickLoginBtn();
+        ExtentReportManager.writeToReport("End of bc_FailLogin");
     }
 }

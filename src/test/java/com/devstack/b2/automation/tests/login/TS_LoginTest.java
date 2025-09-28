@@ -9,6 +9,12 @@ public class TS_LoginTest extends BaseTest {
     @Test
     public void tc_testSuccessfulLogin(){
         LIB_Common common = new LIB_Common(driver);
-        common.bc_Login("admin","pointofsale");
+        common.bc_SuccessLogin("admin", "pointofsale");
+    }
+
+    @Test
+    public void tc_testFailedLogin(){
+        LIB_Common common = new LIB_Common(driver);
+        common.bc_FailLogin("admin", "pointofsale");
     }
 }
