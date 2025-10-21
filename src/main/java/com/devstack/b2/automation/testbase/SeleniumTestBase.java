@@ -1,5 +1,6 @@
 package com.devstack.b2.automation.testbase;
 
+import com.devstack.b2.automation.exceptions.FailToClickExpection;
 import com.devstack.b2.automation.reporter.ExtentReportManager;
 import com.devstack.b2.automation.util.ThreadLocalWebDriverManager;
 import org.openqa.selenium.By;
@@ -21,8 +22,9 @@ public class SeleniumTestBase {
             WebElement webElement = waitForVisibilityOfElement(locator, 10);
             webElement.click();
             ExtentReportManager.logPass("Clicked on locator: " + locator);
-        } catch (Exception e) {
+        } catch (FailToClickExpection e) {
             ExtentReportManager.logFail("No such element: "+locator,"");
+            throw new FailToClickExpection("Failed to click on element: "+locator);
         }
     }
 
